@@ -1,25 +1,21 @@
 <template>
 <div  class="container">
   <headerComponent @toggle-add-task= "toggleAddTask"  :showAddTask="showAddTask" />
-  <div v-show="showAddTask">
-  <AddTask @add-task='addTask' @toggle-add-task="toggleAddTask" />
-  </div>
-  <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks= tasks />
+  <router-view :showAddTask="showAddTask" :toggleAddTask="toggleAddTask" />
+  <Footer />
 </div>
 </template>
 
 <script>
 import headerComponent from './components/Header.vue'
-import Tasks from './components/Tasks.vue'
-import AddTask from './components/AddTask.vue'
+import Footer from './components/Footer.vue'
 
 
 export default {
   name: 'App',
   components: {
     headerComponent,
-    Tasks,
-    AddTask
+    Footer
   },
   data() {
     return{
@@ -29,42 +25,8 @@ export default {
   },
   methods: {
     toggleAddTask(){
-      this.showAddTask = !this.showAddTask
-    },
-    addTask(task){
-      this.tasks = [...this.tasks, task]
-    },
-    toggleReminder(id){
-      console.log(this.id);
-    },
-
-    deleteTask(id) {
-      if(confirm(`Are you sure?`)) {
-        this.tasks = this.tasks.filter((task => task.id !== id))
-      }
+    this.showAddTask = !this.showAddTask
     }
-  },
-  created(){
-    this.tasks = [
-      {
-        id: 1,
-        task: 'Chicken fila',
-        day: 'Oct 1, 1960',
-        reminder: true
-      },
-      {
-        id: 2,
-        task: 'Eat tamru',
-        day: 'Oct 30, 2020',
-        reminder: false
-      },
-      {
-        id: 3,
-        task: 'Address public',
-        day: 'Oct 1, 2022',
-        reminder: true
-      },
-    ]
   }
 }
 </script>

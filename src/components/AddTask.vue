@@ -6,7 +6,7 @@
     </div>
     <div class="form-control">
       <label>Day & Time</label>
-      <input type="text" v-model="day" name="day"
+      <input type="date" v-model="day" name="day"
         placeholder="Add Day & Time"
       />
     </div>
@@ -39,7 +39,7 @@ export default {
             }
 
             const newTask = {
-                id: Math.floor(Math.random()*100000),
+                // id: Math.floor(Math.random()*100000),
                 task: this.task,
                 day: this.day,
                 reminder: this.reminder
